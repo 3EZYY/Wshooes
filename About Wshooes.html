@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Wshooes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #7c3aed 0%, #1e3a8a 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #1e3a8a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.2), 0 10px 10px -5px rgba(124, 58, 237, 0.1);
+        }
+        
+        .value-card {
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(30, 58, 138, 0.1) 100%);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed 0%, #1e3a8a 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="gradient-bg text-white shadow-md">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shoe-prints text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Wshooes</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-home mr-1"></i> Home</a></li>
+                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-info-circle mr-1"></i> About</a></li>
+                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-shopping-bag mr-1"></i> Shop</a></li>
+                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section class="gradient-bg text-white py-20">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Story, Your Comfort</h1>
+                    <p class="text-xl text-purple-100 max-w-3xl mx-auto">
+                        From humble beginnings to becoming a leader in footwear innovation, Wshooes has been stepping forward since 2010.
+                    </p>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <div class="lg:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" 
+                                 alt="Wshooes Workshop" 
+                                 class="rounded-xl shadow-lg w-full h-auto">
+                        </div>
+                        <div class="lg:w-1/2">
+                            <h2 class="text-3xl font-bold text-gray-800 mb-6">Who We Are</h2>
+                            <p class="text-gray-600 mb-6">
+                                Founded in 2010 by footwear enthusiast Mark Johnson, Wshooes began as a small workshop in Portland, Oregon. 
+                                What started as a passion project crafting custom shoes has grown into an internationally recognized brand 
+                                known for its commitment to comfort, quality, and style.
+                            </p>
+                            <p class="text-gray-600 mb-6">
+                                Today, we operate in over 30 countries with more than 200 retail stores worldwide, but we've never lost sight 
+                                of our roots. Every pair of Wshooes still carries the same dedication to craftsmanship that marked our early days.
+                            </p>
+                            <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
+                                <p class="text-purple-800 italic">
+                                    "Our mission has always been simple: create shoes that people love to wear. Not just for how they look, 
+                                    but for how they make you feel from the first step to the last."
+                                </p>
+                                <p class="text-purple-600 mt-2 font-medium">- Mark Johnson, Founder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Section -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Journey</h2>
+                    
+                    <div class="relative max-w-3xl mx-auto">
+                        <div class="absolute left-1/2 h-full w-1 bg-gradient-to-b from-purple-500 to-blue-800 transform -translate-x-1/2"></div>
+                        
+                        <div class="space-y-8">
+                            <!-- Timeline Item 1 -->
+                            <div class="relative pl-8 md:pl-0 md:flex justify-between items-center">
+                                <div class="md:w-5/12 mb-4 md:mb-0">
+                                    <div class="bg-white p-6 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold text-purple-700 mb-2">2010</h3>
+                                        <p class="text-gray-600">Founded in a small garage in Portland with just 3 employees</p>
+                                    </div>
+                                </div>
+                                <div class="hidden md:block md:w-2/12 text-center">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-800 flex items-center justify-center text-white mx-auto">
+                                        <i class="fas fa-shoe-prints"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-5/12"></div>
+                            </div>
+                            
+                            <!-- Timeline Item 2 -->
+                            <div class="relative pl-8 md:pl-0 md:flex justify-between items-center">
+                                <div class="md:w-5/12"></div>
+                                <div class="hidden md:block md:w-2/12 text-center">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-800 flex items-center justify-center text-white mx-auto">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-5/12 mb-4 md:mb-0">
+                                    <div class="bg-white p-6 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold text-purple-700 mb-2">2014</h3>
+                                        <p class="text-gray-600">Opened our first retail store and launched e-commerce platform</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 3 -->
+                            <div class="relative pl-8 md:pl-0 md:flex justify-between items-center">
+                                <div class="md:w-5/12 mb-4 md:mb-0">
+                                    <div class="bg-white p-6 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold text-purple-700 mb-2">2017</h3>
+                                        <p class="text-gray-600">Expanded internationally with stores in Canada and Japan</p>
+                                    </div>
+                                </div>
+                                <div class="hidden md:block md:w-2/12 text-center">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-800 flex items-center justify-center text-white mx-auto">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-5/12"></div>
+                            </div>
+                            
+                            <!-- Timeline Item 4 -->
+                            <div class="relative pl-8 md:pl-0 md:flex justify-between items-center">
+                                <div class="md:w-5/12"></div>
+                                <div class="hidden md:block md:w-2/12 text-center">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-800 flex items-center justify-center text-white mx-auto">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-5/12 mb-4 md:mb-0">
+                                    <div class="bg-white p-6 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold text-purple-700 mb-2">2020</h3>
+                                        <p class="text-gray-600">Won "Most Comfortable Footwear" award at Global Shoe Expo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Timeline Item 5 -->
+                            <div class="relative pl-8 md:pl-0 md:flex justify-between items-center">
+                                <div class="md:w-5/12 mb-4 md:mb-0">
+                                    <div class="bg-white p-6 rounded-lg shadow-md">
+                                        <h3 class="text-xl font-bold text-purple-700 mb-2">2023</h3>
+                                        <p class="text-gray-600">Launched sustainable line with 100% recycled materials</p>
+                                    </div>
+                                </div>
+                                <div class="hidden md:block md:w-2/12 text-center">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-800 flex items-center justify-center text-white mx-auto">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-5/12"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vision & Mission Section -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Vision & Mission</h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-800 mx-auto"></div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl border border-purple-100">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-800 rounded-full flex items-center justify-center text-white mb-6 mx-auto">
+                                <i class="fas fa-eye text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center text-gray-800 mb-4">Our Vision</h3>
+                            <p class="text-gray-600 text-center">
+                                To become the world's most trusted footwear brand by creating innovative, comfortable shoes that 
+                                empower people to move through life with confidence and style.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl border border-purple-100">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-800 rounded-full flex items-center justify-center text-white mb-6 mx-auto">
+                                <i class="fas fa-bullseye text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-center text-gray-800 mb-4">Our Mission</h3>
+                            <p class="text-gray-600 text-center">
+                                To craft high-quality, comfortable footwear using sustainable practices while delivering exceptional 
+                                customer experiences at every step of the journey.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Values Section -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Core Values</h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-800 mx-auto"></div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div class="value-card bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mb-6">
+                                <i class="fas fa-heart text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Passion for Comfort</h3>
+                            <p class="text-gray-600">
+                                We obsess over every detail to ensure our shoes feel as good as they look, because we believe comfort should never be compromised.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mb-6">
+                                <i class="fas fa-globe-americas text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Sustainable Future</h3>
+                            <p class="text-gray-600">
+                                We're committed to reducing our environmental footprint through responsible sourcing and eco-friendly manufacturing.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mb-6">
+                                <i class="fas fa-lightbulb text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Innovation</h3>
+                            <p class="text-gray-600">
+                                We constantly push boundaries with new materials and technologies to create footwear that stands out in the market.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mb-6">
+                                <i class="fas fa-hands-helping text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Community</h3>
+                            <p class="text-gray-600">
+                                We believe in giving back and supporting the communities where we live and work through various initiatives.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mb-6">
+                                <i class="fas fa-gem text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Quality</h3>
+                            <p class="text-gray-600">
+                                Every stitch, every seam, every material is carefully selected and tested to meet our high standards of excellence.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mb-6">
+                                <i class="fas fa-laugh-beam text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Customer Joy</h3>
+                            <p class="text-gray-600">
+                                We measure our success by the smiles we create and the relationships we build with every customer interaction.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Leadership</h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-800 mx-auto"></div>
+                    </div>
+                    
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div class="team-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                            <div class="h-64 overflow-hidden">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mark Johnson" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800">Mark Johnson</h3>
+                                <p class="text-purple-600 font-medium mb-2">Founder & CEO</p>
+                                <p class="text-gray-600 text-sm">
+                                    Footwear industry veteran with over 20 years of experience in design and manufacturing.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-purple-600 hover:text-purple-800"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="text-purple-600 hover:text-purple-800"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="team-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                            <div class="h-64 overflow-hidden">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Chen" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800">Sarah Chen</h3>
+                                <p class="text-purple-600 font-medium mb-2">Chief Design Officer</p>
+                                <p class="text-gray-600 text-sm">
+                                    Leads our creative team with a focus on merging aesthetics with ergonomic design.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-purple-600 hover:text-purple-800"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="text-purple-600 hover:text-purple-800"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="team-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                            <div class="h-64 overflow-hidden">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Kim" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800">David Kim</h3>
+                                <p class="text-purple-600 font-medium mb-2">Head of Operations</p>
+                                <p class="text-gray-600 text-sm">
+                                    Oversees our global supply chain ensuring quality and sustainability standards.
+                                </p>
+                                <div class="flex space-x-3 mt-4">
+                                    <a href="#" class="text-purple-600 hover:text-purple-800"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="gradient-bg text-white py-16">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-6">Ready to Step Into Comfort?</h2>
+                    <p class="text-xl text-purple-100 max-w-2xl mx-auto mb-8">
+                        Join millions of happy customers who have already discovered the Wshooes difference.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#" class="px-8 py-3 bg-white text-purple-700 rounded-lg font-bold hover:bg-gray-100 transition shadow-lg">
+                            Shop Now
+                        </a>
+                        <a href="#" class="px-8 py-3 border border-white text-white rounded-lg font-bold hover:bg-white hover:bg-opacity-10 transition">
+                            Find a Store
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-shoe-prints mr-2"></i> Wshooes
+                        </h3>
+                        <p class="text-gray-400 mb-4">Step into comfort, step into style.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Products</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping & Returns</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Size Guide</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Stay Updated</h4>
+                        <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                            <button class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-r-lg transition">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                    <p>&copy; 2023 Wshooes. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
