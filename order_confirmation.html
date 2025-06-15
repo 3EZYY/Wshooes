@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation - Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/oder_confirmation.css">
     <script>
         tailwind.config = {
             theme: {
@@ -19,27 +19,6 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f9fafb;
-        }
-        
-        .confirmation-card {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .product-card {
-            transition: all 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
@@ -247,17 +226,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Simple animation for confirmation checkmark
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkmark = document.querySelector('.fa-check-circle');
-            checkmark.classList.add('animate-bounce');
-            
-            setTimeout(() => {
-                checkmark.classList.remove('animate-bounce');
-            }, 2000);
-        });
-    </script>
+    <script src="Js/oder_confirmation.js"></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');  
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F3F4F6;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #111827 0%, #818CF8 100%);
+        }
+        
+        .product-image {
+            transition: all 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .color-option {
+            transition: all 0.2s ease;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 2px #818CF8;
+        }
+        
+        .selected-color {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 2px #818CF8;
+        }
+        
+        .size-option {
+            transition: all 0.2s ease;
+        }
+        
+        .size-option:hover {
+            background-color: #818CF8;
+            color: white;
+        }
+        
+        .selected-size {
+            background-color: #818CF8;
+            color: white;
+        }
+        
+        .add-to-cart {
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .heart-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .heart-icon:hover {
+            transform: scale(1.2);
+        }

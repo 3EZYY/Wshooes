@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+        }
+        
+        .checkout-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checkout-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+            border-color: #8b5cf6;
+        }
+        
+        .payment-method {
+            transition: all 0.2s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: #8b5cf6;
+        }
+        
+        .payment-method.selected {
+            border-color: #8b5cf6;
+            background-color: #f5f3ff;
+        }

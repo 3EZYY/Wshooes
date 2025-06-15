@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/check_out.css">
     <script>
         tailwind.config = {
             theme: {
@@ -19,43 +19,6 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f9fafb;
-        }
-        
-        .checkout-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .checkout-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .input-field:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
-            border-color: #8b5cf6;
-        }
-        
-        .payment-method {
-            transition: all 0.2s ease;
-        }
-        
-        .payment-method:hover {
-            border-color: #8b5cf6;
-        }
-        
-        .payment-method.selected {
-            border-color: #8b5cf6;
-            background-color: #f5f3ff;
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
@@ -325,42 +288,6 @@
         </div>
     </footer>
 
-    <script>
-        // Function to select payment method
-        document.querySelectorAll('.payment-method').forEach(method => {
-            method.addEventListener('click', function() {
-                // Remove selected class from all methods in the same group
-                const parent = this.parentElement;
-                parent.querySelectorAll('.payment-method').forEach(m => {
-                    m.classList.remove('selected');
-                    m.querySelector('div').classList.replace('border-primary', 'border-gray-300');
-                    m.querySelector('div > div').classList.replace('bg-primary', 'bg-transparent');
-                });
-                
-                // Add selected class to clicked method
-                this.classList.add('selected');
-                this.querySelector('div').classList.replace('border-gray-300', 'border-primary');
-                this.querySelector('div > div').classList.replace('bg-transparent', 'bg-primary');
-            });
-        });
-        
-        // Format credit card input
-        document.getElementById('card-number').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s+/g, '');
-            if (value.length > 0) {
-                value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
-            }
-            e.target.value = value;
-        });
-        
-        // Format expiry date input
-        document.getElementById('expiry-date').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
-    </script>
+    <script src="Js/check_out.js"></script>
 </body>
 </html>

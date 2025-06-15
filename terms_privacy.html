@@ -5,45 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms & Privacy - Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #7c3aed 0%, #1e3a8a 100%);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #7c3aed 0%, #1e3a8a 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .policy-section {
-            scroll-margin-top: 100px;
-        }
-        
-        .nav-link.active {
-            color: #7c3aed;
-            font-weight: 600;
-            border-left: 3px solid #7c3aed;
-        }
-        
-        .nav-link:hover {
-            color: #7c3aed;
-        }
-        
-        .highlight-box {
-            background-color: rgba(124, 58, 237, 0.05);
-            border-left: 4px solid #7c3aed;
-        }
-    </style>
+    <link rel="stylesheet" href="css/terms_privacy.css">
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
@@ -413,33 +375,6 @@
             </div>
         </footer>
     </div>
-
-    <script>
-        // Highlight active navigation link
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.policy-section');
-            
-            window.addEventListener('scroll', function() {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (pageYOffset >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="Js/terms_privacy.js"></script>
 </body>
 </html>

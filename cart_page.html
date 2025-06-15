@@ -19,36 +19,6 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f9fafb;
-        }
-        
-        .cart-item {
-            transition: all 0.3s ease;
-        }
-        
-        .cart-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .promo-input:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.5);
-        }
-        
-        .quantity-btn {
-            transition: all 0.2s ease;
-        }
-        
-        .quantity-btn:hover {
-            background-color: #5a21b6;
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
@@ -322,47 +292,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Function to update quantity
-        function updateQuantity(itemId, change) {
-            const quantityElement = document.getElementById(`${itemId}-quantity`);
-            let quantity = parseInt(quantityElement.textContent);
-            quantity += change;
-            
-            // Ensure quantity doesn't go below 1
-            if (quantity < 1) quantity = 1;
-            
-            quantityElement.textContent = quantity;
-            updateTotals();
-        }
-        
-        // Function to remove item
-        function removeItem(itemId) {
-            if (confirm('Apakah Anda yakin ingin menghapus item ini dari keranjang?')) {
-                const itemElement = document.getElementById(itemId);
-                if (itemElement) {
-                    itemElement.remove();
-                    updateTotals();
-                }
-            }
-        }
-        
-        // Function to update totals (simplified for demo)
-        function updateTotals() {
-            // In a real app, you would calculate this based on all items in cart
-            const subtotal = 4696000; // This would be calculated
-            const shipping = 25000;
-            const total = subtotal + shipping;
-            
-            document.getElementById('subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-            document.getElementById('total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            updateTotals();
-        });
-    </script>
+    <script src="Js/cart_page.js"></script>
 </body>
 </html>
