@@ -6,7 +6,7 @@
     <title>Tentang Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/about.css">
+    <link rel="stylesheet" href="/Wshooes/assets/css/about.css">
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
@@ -19,10 +19,10 @@
                 </div>
                 <nav>
                     <ul class="flex space-x-6">
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-home mr-1"></i> Home</a></li>
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-info-circle mr-1"></i> About</a></li>
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-shopping-bag mr-1"></i> Shop</a></li>
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
+                        <li><a href="/Wshooes/" class="hover:text-purple-200 transition"><i class="fas fa-home mr-1"></i> Home</a></li>
+                        <li><a href="/Wshooes/pages/about.php" class="hover:text-purple-200 transition"><i class="fas fa-info-circle mr-1"></i> About</a></li>
+                        <li><a href="/Wshooes/pages/all_product.php" class="hover:text-purple-200 transition"><i class="fas fa-shopping-bag mr-1"></i> Shop</a></li>
+                        <li><a href="/Wshooes/?page=contact" class="hover:text-purple-200 transition"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -371,19 +371,19 @@
                     <div>
                         <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Products</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                            <li><a href="/Wshooes/" class="text-gray-400 hover:text-white transition">Home</a></li>
+                            <li><a href="/Wshooes/pages/about.php" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                            <li><a href="/Wshooes/pages/all_product.php" class="text-gray-400 hover:text-white transition">Products</a></li>
+                            <li><a href="/Wshooes/pages/categories.php" class="text-gray-400 hover:text-white transition">Collections</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping & Returns</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition">Size Guide</a></li>
+                            <li><a href="/Wshooes/?page=contact" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                            <li><a href="/Wshooes/pages/faq.php" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                            <li><a href="/Wshooes/pages/shipping.php" class="text-gray-400 hover:text-white transition">Shipping & Returns</a></li>
+                            <li><a href="/Wshooes/pages/size-guide.php" class="text-gray-400 hover:text-white transition">Size Guide</a></li>
                         </ul>
                     </div>
                     <div>

@@ -1,9 +1,12 @@
 <?php
 require_once __DIR__ . '/../config/connection.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/validation.php';
 
 class AuthController {
     private $user;
+    private $conn;
     
     public function __construct() {
         // Start session if not already started
@@ -11,64 +14,71 @@ class AuthController {
             session_start();
         }
         
-        $this->user = new User();
+        try {
+            // Initialize database connection using singleton pattern
+            $db = Database::getInstance();
+            $this->conn = $db->getConnection();
+            
+            $this->user = new User();
+        } catch (Exception $e) {
+            error_log("Failed to initialize AuthController: " . $e->getMessage());
+            throw new Exception("Failed to initialize system. Please try again later.");
+        }
     }
     
     // Handle user registration
     public function register() {
         // Check if form is submitted
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Get form data
-            $full_name = $_POST['full_name'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $confirm_password = $_POST['confirm_password'] ?? '';
+            // Get all form data
+            $form_data = [
+                'username' => $_POST['username'] ?? '',
+                'full_name' => $_POST['full_name'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'password' => $_POST['password'] ?? '',
+                'confirm_password' => $_POST['confirm_password'] ?? '',
+                'phone' => $_POST['phone'] ?? '',
+                'address' => $_POST['address'] ?? '',
+                'terms' => $_POST['terms'] ?? ''
+            ];
             
-            // Validate form data
-            $errors = [];
+            // Store form data in session for repopulating form
+            $_SESSION['form_data'] = $form_data;
             
-            if (empty($full_name)) {
-                $errors[] = "Nama lengkap harus diisi";
-            }
-            
-            if (empty($email)) {
-                $errors[] = "Email harus diisi";
-            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Format email tidak valid";
-            }
-            
-            if (empty($password)) {
-                $errors[] = "Password harus diisi";
-            } elseif (strlen($password) < 6) {
-                $errors[] = "Password minimal 6 karakter";
-            }
-            
-            if ($password !== $confirm_password) {
-                $errors[] = "Konfirmasi password tidak cocok";
-            }
+            // Validate form data using validation function
+            $errors = validate_registration($form_data);
             
             // Check if email already exists
-            if (!empty($email) && $this->user->get_by_email($email)) {
+            if (!empty($form_data['email']) && $this->user->get_by_email($form_data['email'])) {
                 $errors[] = "Email sudah terdaftar";
+            }
+            
+            // Check if username already exists
+            if (!empty($form_data['username']) && $this->user->get_by_username($form_data['username'])) {
+                $errors[] = "Username sudah digunakan";
             }
             
             // If no errors, create user
             if (empty($errors)) {
                 // Set user properties
-                $this->user->full_name = $full_name;
-                $this->user->email = $email;
-                // Generate username from email (part before @)
-                $this->user->username = strtolower(explode('@', $email)[0]);
-                $this->user->password = $password; // Model will hash the password
+                $this->user->username = $form_data['username'];
+                $this->user->full_name = $form_data['full_name'];
+                $this->user->email = $form_data['email'];
+                $this->user->password = $form_data['password']; // Model will hash the password
+                $this->user->phone_number = $form_data['phone'];
+                $this->user->address = $form_data['address']; // Address will be handled by model
                 $this->user->role = 'customer'; // Default role
                 
                 // Create user
                 if ($this->user->create()) {
+                    // Clear form data
+                    unset($_SESSION['form_data']);
+                    
                     // Set success message
                     $_SESSION['success_message'] = "Pendaftaran berhasil! Silakan login.";
                     
                     // Redirect to login page
-                    header('Location: /auth/login.php');
+                    header('Location: /Wshooes/auth/login.php');
                     exit;
                 } else {
                     $errors[] = "Terjadi kesalahan saat mendaftar. Silakan coba lagi.";
@@ -78,10 +88,6 @@ class AuthController {
             // If there are errors, store them in session
             if (!empty($errors)) {
                 $_SESSION['error_messages'] = $errors;
-                $_SESSION['form_data'] = [
-                    'full_name' => $full_name,
-                    'email' => $email
-                ];
             }
         }
     }
@@ -90,61 +96,73 @@ class AuthController {
     public function login() {
         // Check if form is submitted
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Get form data
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $remember = isset($_POST['remember']);
-            
-            // Validate form data
-            $errors = [];
-            
-            if (empty($email)) {
-                $errors[] = "Email harus diisi";
-            }
-            
-            if (empty($password)) {
-                $errors[] = "Password harus diisi";
-            }
-            
-            // If no errors, attempt login
-            if (empty($errors)) {
-                // Get user by email
-                $user = $this->user->get_by_email($email);
+            try {
+                // Get form data
+                $email = $_POST['email'] ?? '';
+                $password = $_POST['password'] ?? '';
+                $remember = isset($_POST['remember']);
                 
-                if ($user && $this->user->verify_password($password)) {
-                    // Start session if not already started
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
-                    
-                    // Set user session
-                    $_SESSION['user_id'] = $this->user->id;
-                    $_SESSION['user_name'] = $this->user->full_name;
-                    $_SESSION['user_email'] = $this->user->email;
-                    $_SESSION['user_role'] = $this->user->role;
-                    
-                    // Set remember me cookie if checked
-                    if ($remember) {
-                        $token = bin2hex(random_bytes(32));
-                        $expires = time() + (30 * 24 * 60 * 60); // 30 days
-                        
-                        // Store token in database
-                        $this->user->set_remember_token($token, $expires);
-                        
-                        // Set cookie
-                        setcookie('remember_token', $token, $expires, '/', '', false, true);
-                    }
-                    
-                    // Redirect based on role
-                    if ($this->user->role === 'admin') {
-                        header('Location: /admin/dashboard.php');
-                    } else {
-                        header('Location: /index.php');
-                    }
-                    exit;
-                } else {
-                    $errors[] = "Email atau password salah";
+                error_log("Login attempt for email: " . $email);
+                
+                // Validate form data
+                $errors = [];
+                
+                if (empty($email)) {
+                    $errors[] = "Email harus diisi";
                 }
+                
+                if (empty($password)) {
+                    $errors[] = "Password harus diisi";
+                }
+                
+                // If no errors, attempt login
+                if (empty($errors)) {
+                    error_log("Attempting to get user by email");
+                    // Get user by email
+                    if ($this->user->get_by_email($email)) {
+                        error_log("User found, verifying password");
+                        if ($this->user->verify_password($password)) {
+                            error_log("Password verified successfully");
+                            // Set user session
+                            $_SESSION['user_id'] = $this->user->id;
+                            $_SESSION['username'] = $this->user->username;
+                            $_SESSION['user_email'] = $this->user->email;
+                            $_SESSION['user_role'] = $this->user->role;
+                            $_SESSION['user_name'] = $this->user->full_name;
+                            
+                            // Set remember me cookie if checked
+                            if ($remember) {
+                                $token = bin2hex(random_bytes(32));
+                                $expires = time() + (30 * 24 * 60 * 60); // 30 days
+                                
+                                // Store token in database
+                                $this->user->set_remember_token($token, $expires);
+                                
+                                // Set cookie
+                                setcookie('remember_token', $token, $expires, '/');
+                            }
+                            
+                            error_log("Login successful, redirecting user");
+                            // Redirect based on role
+                            if ($this->user->role === 'admin') {
+                                header('Location: /Wshooes/admin/dashboard.php');
+                            } else {
+                                header('Location: /Wshooes/index.php');
+                            }
+                            exit;
+                        } else {
+                            error_log("Password verification failed");
+                            $errors[] = "Password salah";
+                        }
+                    } else {
+                        error_log("User not found with email: " . $email);
+                        $errors[] = "Email tidak ditemukan";
+                    }
+                }
+            } catch (Exception $e) {
+                error_log("Login error detail: " . $e->getMessage());
+                error_log("Stack trace: " . $e->getTraceAsString());
+                $errors[] = "Terjadi kesalahan sistem. Silakan coba lagi nanti.";
             }
             
             // If there are errors, store them in session
@@ -176,7 +194,7 @@ class AuthController {
         session_destroy();
         
         // Redirect to login page
-        header('Location: /auth/login.php');
+        header('Location: /Wshooes/auth/login.php');
         exit;
     }
     
@@ -226,19 +244,14 @@ class AuthController {
     
     // Check if user has admin role
     public function is_admin() {
-        return $this->is_logged_in() && $_SESSION['user_role'] === 'admin';
+        return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
     }
     
     // Require user to be logged in
     public function require_login() {
         if (!$this->is_logged_in()) {
-            // Store current URL for redirect after login if it's a valid URL
-            if (isset($_SERVER['REQUEST_URI'])) {
-                $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-            }
-            
-            // Redirect to login page
-            header('Location: /auth/login.php');
+            $_SESSION['error_messages'] = ['Anda harus login terlebih dahulu'];
+            header('Location: /Wshooes/auth/login.php');
             exit;
         }
     }
@@ -248,9 +261,8 @@ class AuthController {
         $this->require_login();
         
         if (!$this->is_admin()) {
-            // Redirect to home page with error
-            $_SESSION['error_messages'] = ["Anda tidak memiliki akses ke halaman ini"];
-            header('Location: /index.php');
+            $_SESSION['error_messages'] = ['Anda tidak memiliki akses ke halaman ini'];
+            header('Location: /Wshooes/index.php');
             exit;
         }
     }

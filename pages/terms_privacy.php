@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms & Privacy - Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/terms_privacy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/Wshooes/assets/css/terms_privacy.css">
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
         <!-- Header -->
         <header class="gradient-bg text-white shadow-md">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <div class="flex items-center space-x-2">
+                <a href="/Wshooes/" class="flex items-center space-x-2">
                     <i class="fas fa-shoe-prints text-2xl"></i>
                     <h1 class="text-2xl font-bold">Wshooes</h1>
-                </div>
+                </a>
                 <nav>
                     <ul class="flex space-x-6">
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-home mr-1"></i> Home</a></li>
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-shopping-bag mr-1"></i> Shop</a></li>
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-file-alt mr-1"></i> Policies</a></li>
-                        <li><a href="#" class="hover:text-purple-200 transition"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
+                        <li><a href="/Wshooes/" class="hover:text-purple-200 transition"><i class="fas fa-home mr-1"></i> Home</a></li>
+                        <li><a href="/Wshooes/pages/all_product.php" class="hover:text-purple-200 transition"><i class="fas fa-shopping-bag mr-1"></i> Shop</a></li>
+                        <li><a href="/Wshooes/pages/about.php" class="hover:text-purple-200 transition"><i class="fas fa-info-circle mr-1"></i> About</a></li>
+                        <li><a href="#contact" class="hover:text-purple-200 transition"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -297,7 +298,7 @@
                             </div>
                             
                             <!-- Contact Information -->
-                            <div class="bg-white rounded-lg shadow-sm p-8">
+                            <div id="contact" class="bg-white rounded-lg shadow-sm p-8">
                                 <div class="flex items-center mb-6">
                                     <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-800 rounded-lg flex items-center justify-center text-white mr-4">
                                         <i class="fas fa-headset text-xl"></i>
@@ -375,6 +376,6 @@
             </div>
         </footer>
     </div>
-    <script src="Js/terms_privacy.js"></script>
+    <script src="/Wshooes/assets/Js/terms_privacy.js"></script>
 </body>
 </html>

@@ -41,7 +41,7 @@ unset($_SESSION['success_message']);
     <title>Daftar - Wshooes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/Wshooes/assets/css/style.css">
     <style>
         .signup-container {
             max-width: 550px;
@@ -91,7 +91,7 @@ unset($_SESSION['success_message']);
     <div class="container">
         <div class="signup-container">
             <div class="signup-header">
-                <img src="/assets/images/logo.png" alt="Wshooes Logo">
+                <img src="/Wshooes/assets/images/logo.png" alt="Wshooes Logo">
                 <h2>Daftar Akun Baru</h2>
                 <p>Buat akun Anda untuk mulai berbelanja</p>
             </div>
@@ -112,7 +112,7 @@ unset($_SESSION['success_message']);
                 </div>
             <?php endif; ?>
             
-            <form action="/auth/signup.php" method="POST">
+            <form action="/Wshooes/auth/signup.php" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -165,14 +165,14 @@ unset($_SESSION['success_message']);
                 
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
-                    <label class="form-check-label" for="terms">Saya setuju dengan <a href="/terms.php">syarat dan ketentuan</a></label>
+                    <label class="form-check-label" for="terms">Saya setuju dengan <a href="/Wshooes/terms.php">syarat dan ketentuan</a></label>
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-signup w-100">Daftar</button>
             </form>
             
             <div class="signup-footer">
-                <p>Sudah punya akun? <a href="/auth/login.php">Login sekarang</a></p>
+                <p>Sudah punya akun? <a href="/Wshooes/auth/login.php">Login sekarang</a></p>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/user_profile.css">
+    <link rel="stylesheet" href="/Wshooes/assets/css/user_profile.css">
     <script>
         tailwind.config = {
             theme: {
@@ -29,7 +29,7 @@
                 <h1 class="text-2xl font-bold">Wshooes</h1>
             </div>
             <nav class="hidden md:flex space-x-6">
-                <a href="#" class="hover:text-purple-200 transition">Home</a>
+                <a href="/Wshooes/index.php" class="hover:text-purple-200 transition">Home</a>
                 <a href="#" class="hover:text-purple-200 transition">Products</a>
                 <a href="#" class="hover:text-purple-200 transition">New Arrivals</a>
                 <a href="#" class="hover:text-purple-200 transition">Sale</a>
@@ -365,6 +365,6 @@
             </div>
         </div>
     </footer>
-    <script src="Js/user_profile.js"></script>
+    <script src="/Wshooes/Js/user_profile.js"></script>
 </body>
 </html>
