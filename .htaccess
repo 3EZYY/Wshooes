@@ -1,0 +1,34 @@
+# Prevent directory listing
+Options -Indexes
+
+# Handle errors
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+
+# Protect sensitive files
+<FilesMatch "^\.(htaccess|htpasswd|ini|log|sh|inc|bak|env)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# Protect config directory
+<FilesMatch "^(connection\.php|config\.php)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /Wshooes/
+
+# Redirect to HTTPS (uncomment when SSL is configured)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# Prevent access to sensitive directories
+RewriteRule ^(config|includes|vendor)/ - [F,L]

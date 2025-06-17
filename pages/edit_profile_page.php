@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile - Wshooes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/edit_profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/edit_profile.css">
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
@@ -169,6 +170,6 @@
             </div>
         </footer>
     </div>
-    <script src="js/edit_profile.js"></script>
+    <script src="../assets/Js/edit_profile.js"></script>
 </body>
 </html>

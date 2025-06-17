@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wshooes - Premium Footwear</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="/Wshooes/assets/css/landing_page.css">
 </head>
 <body class="bg-gray-50 text-gray-800 transition-all">
     <!-- Header -->
@@ -34,9 +34,9 @@
                     <span class="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
                 </button>
                 
-                <button id="auth-btn" class="hidden md:block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
+                <a href="/Wshooes/auth/login.php" class="hidden md:block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition text-center">
                     Sign In
-                </button>
+                </a>
                 
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
                     <i class="fas fa-bars text-gray-600 dark:text-gray-300"></i>
@@ -52,9 +52,9 @@
                 <a href="#" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Collections</a>
                 <a href="#" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">About</a>
                 <a href="#" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contact</a>
-                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition w-full">
+                <a href="/Wshooes/auth/login.php" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition w-full block text-center">
                     Sign In
-                </button>
+                </a>
             </div>
         </div>
     </header>
@@ -532,6 +532,6 @@
             </div>
         </div>
     </div>
-    <script src="Js/home.js"></script>
+    <script src="/Wshooes/assets/js/landing_page.js"></script>
 </body>
 </html>

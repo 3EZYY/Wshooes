@@ -1,5 +1,5 @@
 <?php
-// filepath: c:\xampp\htdocs\Wshooes\database.php
+// filepath: c:\xampp\htdocs\Wshooes\connection.php
 
 require_once 'config.php';
 
