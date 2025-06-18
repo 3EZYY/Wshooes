@@ -62,11 +62,10 @@ if (isset($_GET['page'])) {
                 <i class="fas fa-shoe-prints text-2xl text-indigo-600 dark:text-indigo-400"></i>
                 <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Wshooes</h1>
             </div>
-            
-            <nav class="hidden md:flex space-x-8">
+              <nav class="hidden md:flex space-x-8">
                 <a href="/Wshooes/" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</a>
                 <a href="/Wshooes/pages/all_product.php" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Products</a>
-                <a href="/Wshooes/pages/categories.php" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Collections</a>
+                <a href="/Wshooes/pages/collection.php" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Collections</a>
                 <a href="/Wshooes/pages/about.php" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">About</a>
                 <a href="/Wshooes/pages/terms_privacy.php#contact" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contact</a>
             </nav>
@@ -105,10 +104,9 @@ if (isset($_GET['page'])) {
         
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="/Wshooes/" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</a>
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">                <a href="/Wshooes/" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</a>
                 <a href="/Wshooes/pages/all_product.php" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Products</a>
-                <a href="/Wshooes/pages/categories.php" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Collections</a>
+                <a href="/Wshooes/pages/collection.php" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Collections</a>
                 <a href="/Wshooes/pages/about.php" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">About</a>
                 <a href="/Wshooes/pages/terms_privacy.php#contact" class="font-medium py-2 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contact</a>
                 
@@ -135,8 +133,7 @@ if (isset($_GET['page'])) {
                 <div class="flex space-x-4">
                     <a href="/Wshooes/pages/all_product.php" class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition">
                         Shop Now
-                    </a>
-                    <a href="/Wshooes/pages/categories.php" class="border-2 border-white hover:bg-white hover:text-indigo-600 px-6 py-3 rounded-lg font-medium transition">
+                    </a>                    <a href="/Wshooes/pages/collection.php" class="border-2 border-white hover:bg-white hover:text-indigo-600 px-6 py-3 rounded-lg font-medium transition">
                         Explore Collections
                     </a>
                 </div>
@@ -285,21 +282,6 @@ if (isset($_GET['page'])) {
                     <p class="text-gray-600 dark:text-gray-300">Our customer service team is always ready to assist you with any inquiries.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="py-16 bg-indigo-600 text-white dark:bg-indigo-800">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
-            <p class="mb-8 max-w-2xl mx-auto opacity-90">Subscribe to our newsletter for exclusive offers, new arrivals, and style tips.</p>
-            
-            <form class="max-w-md mx-auto flex" method="POST" action="/Wshooes/api/newsletter.php">
-                <input type="email" name="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-800" required>
-                <button type="submit" class="bg-indigo-800 hover:bg-indigo-900 px-6 py-3 rounded-r-lg font-medium transition dark:bg-indigo-700 dark:hover:bg-indigo-600">
-                    Subscribe
-                </button>
-            </form>
         </div>
     </section>
 

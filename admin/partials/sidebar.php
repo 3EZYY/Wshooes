@@ -28,24 +28,26 @@
                 <i class="fas fa-users mr-3"></i>
                 Users
             </a>
-            
-            <div class="pt-4 mt-4 border-t border-gray-700">
-                <a href="/Wshooes/admin/categories.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700">
+              <div class="pt-4 mt-4 border-t border-gray-700">                <a href="/Wshooes/admin/register.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 <?php echo basename($_SERVER['PHP_SELF']) == 'register.php' ? 'bg-gray-700' : ''; ?>">
+                    <i class="fas fa-user-plus mr-3"></i>
+                    Register Admin
+                </a>
+                  <a href="/Wshooes/admin/categories.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 <?php echo basename($_SERVER['PHP_SELF']) == 'categories.php' ? 'bg-gray-700' : ''; ?>">
                     <i class="fas fa-tags mr-3"></i>
                     Categories
                 </a>
                 
-                <a href="/Wshooes/admin/reviews.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700">
+                <a href="/Wshooes/admin/reviews.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 <?php echo basename($_SERVER['PHP_SELF']) == 'reviews.php' ? 'bg-gray-700' : ''; ?>">
                     <i class="fas fa-star mr-3"></i>
                     Reviews
                 </a>
                 
-                <a href="/Wshooes/admin/coupons.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700">
+                <a href="/Wshooes/admin/coupons.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 <?php echo basename($_SERVER['PHP_SELF']) == 'coupons.php' ? 'bg-gray-700' : ''; ?>">
                     <i class="fas fa-ticket-alt mr-3"></i>
                     Coupons
                 </a>
                 
-                <a href="/Wshooes/admin/settings.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700">
+                <a href="/Wshooes/admin/settings.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 <?php echo basename($_SERVER['PHP_SELF']) == 'settings.php' ? 'bg-gray-700' : ''; ?>">
                     <i class="fas fa-cog mr-3"></i>
                     Settings
                 </a>
@@ -56,8 +58,7 @@
             <a href="/Wshooes/pages/landing_page.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700" target="_blank">
                 <i class="fas fa-external-link-alt mr-3"></i>
                 View Site
-            </a>
-            <a href="/Wshooes/auth/logout.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 text-red-400">
+            </a>            <a href="/Wshooes/admin/logout.php" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg hover:bg-gray-700 text-red-400">
                 <i class="fas fa-sign-out-alt mr-3"></i>
                 Logout
             </a>

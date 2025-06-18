@@ -23,10 +23,9 @@ class Product {
     public $total_reviews;
     public $created_at;
     public $updated_at;
-    
-    public function __construct() {
-        global $conn;
-        $this->conn = $conn;
+      public function __construct() {
+        $database = Database::getInstance();
+        $this->conn = $database->getConnection();
     }
     
     // Create new product
@@ -708,6 +707,119 @@ class Product {
                         break;
                 }
             }
+        }
+    }
+    
+    // Get product by ID
+    public function get_by_id($id) {
+        try {
+            // Sanitize input
+            $id = intval($id);
+            
+            if ($id <= 0) {
+                return false;
+            }
+            
+            // Create query with category join
+            $query = "SELECT p.*, c.name as category_name 
+                      FROM {$this->table} p 
+                      LEFT JOIN categories c ON p.category_id = c.id 
+                      WHERE p.id = ? AND p.status = 'active'
+                      LIMIT 1";
+            
+            $stmt = $this->conn->prepare($query);
+            
+            if (!$stmt) {
+                error_log("Failed to prepare statement: " . $this->conn->error);
+                return false;
+            }
+            
+            $stmt->bind_param("i", $id);
+            
+            if (!$stmt->execute()) {
+                error_log("Failed to execute statement: " . $stmt->error);
+                return false;
+            }
+            
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                
+                // Set object properties
+                $this->id = $row['id'];
+                $this->name = $row['name'];
+                $this->description = $row['description'];
+                $this->price = $row['price'];
+                $this->stock = $row['stock'];
+                $this->category_id = $row['category_id'];
+                $this->category_name = $row['category_name'];
+                $this->brand = $row['brand'];
+                $this->sizes = $row['sizes'];
+                $this->colors = $row['colors'];
+                $this->main_image = $row['main_image'];
+                $this->status = $row['status'];
+                $this->is_featured = $row['is_featured'];
+                $this->rating = $row['rating'] ?? 0;
+                $this->total_reviews = $row['total_reviews'] ?? 0;
+                $this->created_at = $row['created_at'];
+                $this->updated_at = $row['updated_at'];
+                
+                return $row; // Return array for easier use
+            }
+            
+            return false;
+              } catch (Exception $e) {
+            error_log("Error in Product::get_by_id(): " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    // Get products by category name
+    public function get_by_category($category_name, $limit = 8) {
+        try {
+            // Sanitize input
+            $category_name = strtolower(trim($category_name));
+            $limit = intval($limit);
+            
+            if (empty($category_name)) {
+                return [];
+            }
+            
+            // Create query to get products by category name
+            $query = "SELECT p.*, c.name as category_name 
+                      FROM {$this->table} p 
+                      LEFT JOIN categories c ON p.category_id = c.id 
+                      WHERE LOWER(c.name) = ? AND p.status = 'active'
+                      ORDER BY p.created_at DESC 
+                      LIMIT ?";
+            
+            $stmt = $this->conn->prepare($query);
+            
+            if (!$stmt) {
+                error_log("Failed to prepare statement: " . $this->conn->error);
+                return [];
+            }
+            
+            $stmt->bind_param("si", $category_name, $limit);
+            
+            if (!$stmt->execute()) {
+                error_log("Failed to execute statement: " . $stmt->error);
+                return [];
+            }
+            
+            $result = $stmt->get_result();
+            $products = [];
+            
+            while ($row = $result->fetch_assoc()) {
+                $products[] = $row;
+            }
+            
+            return $products;
+            
+        } catch (Exception $e) {
+            error_log("Error in Product::get_by_category(): " . $e->getMessage());
+            return [];
         }
     }
 }

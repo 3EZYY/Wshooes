@@ -3,15 +3,17 @@ require_once __DIR__ . '/../config/connection.php';
 
 class Cart {
     private $conn;
-    private $table = 'cart';
+    private $table = 'carts';
     
     // Cart properties
     public $id;
+    public $session_id;
     public $user_id;
     public $product_id;
     public $quantity;
     public $size;
     public $color;
+    public $price;
     public $created_at;
     public $updated_at;
     
@@ -21,33 +23,165 @@ class Cart {
     }
     
     // Add item to cart
-    public function add_item() {
+    public function addToCart($session_id, $user_id, $product_id, $quantity, $size, $color, $price) {
         // Check if item already exists in cart
-        $existing_item = $this->get_cart_item($this->user_id, $this->product_id, $this->size, $this->color);
+        $existing_item = $this->getCartItem($session_id, $user_id, $product_id, $size, $color);
         
         if ($existing_item) {
             // Update quantity instead of adding new item
-            $new_quantity = $existing_item['quantity'] + $this->quantity;
-            return $this->update_quantity($existing_item['id'], $new_quantity);
+            $new_quantity = $existing_item['quantity'] + $quantity;
+            return $this->updateQuantity($existing_item['id'], $new_quantity);
         }
         
         // Create query
-        $query = "INSERT INTO {$this->table} (user_id, product_id, quantity, size, color, created_at) 
-                  VALUES (?, ?, ?, ?, ?, NOW())";
+        $query = "INSERT INTO {$this->table} (session_id, user_id, product_id, quantity, size, color, price, created_at) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         
         if (!$stmt) {
-            handle_db_error($query);
             return false;
         }
         
-        // Sanitize inputs
-        $this->size = sanitize_input($this->size ?? '');
-        $this->color = sanitize_input($this->color ?? '');
-        
         // Bind parameters
+        $stmt->bind_param("siidssd", $session_id, $user_id, $product_id, $quantity, $size, $color, $price);
+        
+        return $stmt->execute();
+    }
+    
+    // Get cart item
+    private function getCartItem($session_id, $user_id, $product_id, $size, $color) {
+        $query = "SELECT * FROM {$this->table} 
+                  WHERE session_id = ? AND product_id = ? AND size = ? AND color = ?";
+        
+        if ($user_id) {
+            $query .= " AND user_id = ?";
+        }
+        
+        $stmt = $this->conn->prepare($query);
+        
+        if ($user_id) {
+            $stmt->bind_param("sissi", $session_id, $product_id, $size, $color, $user_id);
+        } else {
+            $stmt->bind_param("siss", $session_id, $product_id, $size, $color);
+        }
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_assoc();
+    }
+    
+    // Update quantity
+    public function updateQuantity($cart_id, $quantity) {
+        $query = "UPDATE {$this->table} SET quantity = ?, updated_at = NOW() WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $quantity, $cart_id);
+        
+        return $stmt->execute();
+    }
+    
+    // Get cart items by session or user
+    public function getCartItems($session_id, $user_id = null) {
+        $query = "SELECT c.*, p.name as product_name, p.image_url, p.brand 
+                  FROM {$this->table} c 
+                  JOIN products p ON c.product_id = p.id 
+                  WHERE c.session_id = ?";
+        
+        if ($user_id) {
+            $query .= " AND c.user_id = ?";
+        }
+        
+        $query .= " ORDER BY c.created_at DESC";
+        
+        $stmt = $this->conn->prepare($query);
+        
+        if ($user_id) {
+            $stmt->bind_param("si", $session_id, $user_id);
+        } else {
+            $stmt->bind_param("s", $session_id);
+        }
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    // Remove item from cart
+    public function removeItem($cart_id) {
+        $query = "DELETE FROM {$this->table} WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $cart_id);
+        
+        return $stmt->execute();
+    }
+    
+    // Clear cart
+    public function clearCart($session_id, $user_id = null) {
+        $query = "DELETE FROM {$this->table} WHERE session_id = ?";
+        
+        if ($user_id) {
+            $query .= " AND user_id = ?";
+        }
+        
+        $stmt = $this->conn->prepare($query);
+        
+        if ($user_id) {
+            $stmt->bind_param("si", $session_id, $user_id);
+        } else {
+            $stmt->bind_param("s", $session_id);
+        }
+        
+        return $stmt->execute();
+    }
+    
+    // Get cart total
+    public function getCartTotal($session_id, $user_id = null) {
+        $query = "SELECT SUM(quantity * price) as total FROM {$this->table} WHERE session_id = ?";
+        
+        if ($user_id) {
+            $query .= " AND user_id = ?";
+        }
+        
+        $stmt = $this->conn->prepare($query);
+        
+        if ($user_id) {
+            $stmt->bind_param("si", $session_id, $user_id);
+        } else {
+            $stmt->bind_param("s", $session_id);
+        }
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        
+        return $row['total'] ?? 0;
+    }
+    
+    // Get cart count
+    public function getCartCount($session_id, $user_id = null) {
+        $query = "SELECT SUM(quantity) as count FROM {$this->table} WHERE session_id = ?";
+        
+        if ($user_id) {
+            $query .= " AND user_id = ?";
+        }
+        
+        $stmt = $this->conn->prepare($query);
+        
+        if ($user_id) {
+            $stmt->bind_param("si", $session_id, $user_id);
+        } else {
+            $stmt->bind_param("s", $session_id);
+        }
+        
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        
+        return $row['count'] ?? 0;
+    }
         $stmt->bind_param('iiiss', 
             $this->user_id, 
             $this->product_id, 

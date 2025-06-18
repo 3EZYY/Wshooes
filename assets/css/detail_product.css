@@ -1,53 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');  
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F3F4F6;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #111827 0%, #818CF8 100%);
-        }
-        
-        .product-image {
-            transition: all 0.3s ease;
-        }
-        
-        .product-image:hover {
-            transform: scale(1.05);
-        }
-        
-        .color-option {
-            transition: all 0.2s ease;
-        }
-        
-        .color-option:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 0 2px #818CF8;
-        }
-        
-        .selected-color {
-            transform: scale(1.1);
-            box-shadow: 0 0 0 2px #818CF8;
-        }
-        
-        .size-option {
-            transition: all 0.2s ease;
-        }
-        
-        .size-option:hover {
-            background-color: #818CF8;
-            color: white;
-        }
-        
-        .selected-size {
-            background-color: #818CF8;
-            color: white;
-        }
-        
-        .add-to-cart {
-            transition: all 0.3s ease;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #0a0e27;
+    color: #ffffff;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e1b4b 100%);
+}
+
+.glass-effect {
+    background: rgba(30, 58, 138, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.nav-blur {
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.size-btn {
+    transition: all 0.3s ease;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.size-btn:hover, .size-btn.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.color-option {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.color-option.active::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 2px solid #3b82f6;
+    border-radius: 50%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.thumbnail {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.thumbnail.active {
+    border-color: #3b82f6;
+    transform: scale(1.05);
+}
+
+.star-rating {
+    color: #fbbf24;
+}
+
+.review-card {
+    background: rgba(30, 58, 138, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.related-card {
+    background: rgba(30, 58, 138, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .text-4xl {
+        font-size: 2rem;
+    }
+    
+    .text-3xl {
+        font-size: 1.5rem;
+    }
+}
         
         .add-to-cart:hover {
             transform: translateY(-2px);

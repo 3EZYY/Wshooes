@@ -1,31 +1,41 @@
-<!-- Admin Header -->
-<header class="bg-white shadow-sm border-b border-gray-200">
-    <div class="flex items-center justify-between px-8 py-4">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-900"><?php echo $page_title ?? 'Admin Panel'; ?></h1>
-            <p class="text-sm text-gray-600"><?php echo $page_description ?? 'Manage your e-commerce store'; ?></p>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $page_title ?? 'Admin Panel'; ?> - Wshooes Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
         
-        <div class="flex items-center space-x-4">
-            <!-- Notifications -->
-            <div class="relative">
-                <button class="p-2 text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
-                </button>
-            </div>
-            
-            <!-- User Menu -->
-            <div class="relative">
-                <div class="flex items-center space-x-3">
-                    <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($_SESSION['user_name'] ?? 'Admin'); ?>&background=3b82f6&color=fff" 
-                         alt="Profile" class="w-10 h-10 rounded-full">
-                    <div>
-                        <p class="text-sm font-medium text-gray-900"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Admin'); ?></p>
-                        <p class="text-xs text-gray-500">Administrator</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">

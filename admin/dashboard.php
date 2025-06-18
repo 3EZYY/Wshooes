@@ -7,6 +7,10 @@ require_once __DIR__ . '/../includes/functions.php';
 // Require admin access
 require_admin();
 
+// Get database connection
+$database = Database::getInstance();
+$conn = $database->getConnection();
+
 // Get dashboard statistics
 $stats = [];
 
@@ -15,7 +19,7 @@ $result = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'custom
 $stats['total_users'] = $result->fetch_assoc()['total'];
 
 // Total products
-$result = $conn->query("SELECT COUNT(*) as total FROM products");
+$result = $conn->query("SELECT COUNT(*) as total FROM products WHERE status = 'active'");
 $stats['total_products'] = $result->fetch_assoc()['total'];
 
 // Total orders
@@ -23,7 +27,7 @@ $result = $conn->query("SELECT COUNT(*) as total FROM orders");
 $stats['total_orders'] = $result->fetch_assoc()['total'];
 
 // Total revenue
-$result = $conn->query("SELECT SUM(total_amount) as total FROM orders WHERE status = 'completed'");
+$result = $conn->query("SELECT SUM(total_amount) as total FROM orders WHERE status = 'delivered'");
 $stats['total_revenue'] = $result->fetch_assoc()['total'] ?? 0;
 
 // Recent orders
@@ -38,8 +42,8 @@ $recent_orders = $conn->query("
 // Low stock products
 $low_stock = $conn->query("
     SELECT * FROM products 
-    WHERE stock_quantity <= 10 AND stock_quantity > 0 
-    ORDER BY stock_quantity ASC 
+    WHERE stock <= 10 AND stock > 0 
+    ORDER BY stock ASC 
     LIMIT 5
 ")->fetch_all(MYSQLI_ASSOC);
 
@@ -179,7 +183,7 @@ $page_title = "Admin Dashboard";
                     <?php foreach ($low_stock as $product): ?>
                     <div class="border border-red-200 rounded-lg p-4 bg-red-50">
                         <h4 class="font-medium text-gray-900"><?php echo htmlspecialchars($product['name']); ?></h4>
-                        <p class="text-sm text-gray-600">Stock: <span class="text-red-600 font-medium"><?php echo $product['stock_quantity']; ?> left</span></p>
+                        <p class="text-sm text-gray-600">Stock: <span class="text-red-600 font-medium"><?php echo $product['stock']; ?> left</span></p>
                         <a href="/Wshooes/admin/products.php?edit=<?php echo $product['id']; ?>" class="text-blue-600 hover:text-blue-900 text-sm">Update stock →</a>
                     </div>
                     <?php endforeach; ?>
