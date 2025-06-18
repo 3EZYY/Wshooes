@@ -3,8 +3,8 @@ session_start();
 
 try {
     // Include necessary files
-    require_once __DIR__ . '/../../config/connection.php';
-    require_once __DIR__ . '/../../controllers/AuthController.php';
+    require_once __DIR__ . '/../config/connection.php';
+    require_once __DIR__ . '/../controllers/AuthController.php';
 
     // Create auth controller instance
     $auth = new AuthController();
@@ -162,7 +162,6 @@ try {
             border-color: var(--primary-color);
         }
 
-        /* Password field styling */
         .password-field {
             position: relative;
         }
@@ -267,4 +266,4 @@ try {
         }
     </script>
 </body>
-</html>
+</html> 

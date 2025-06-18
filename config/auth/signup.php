@@ -2,8 +2,8 @@
 session_start();
 
 // Include necessary files
-require_once __DIR__ . '/../config/connection.php';
-require_once __DIR__ . '/../controllers/AuthController.php';
+require_once __DIR__ . '/../../config/connection.php';
+require_once __DIR__ . '/../../controllers/AuthController.php';
 
 // Create auth controller instance
 $auth = new AuthController();
@@ -11,7 +11,7 @@ $auth = new AuthController();
 // Check if user is already logged in
 if ($auth->is_logged_in()) {
     // Redirect to home page
-    header('Location: /index.php');
+    header('Location: /Wshooes/index.php');
     exit;
 }
 
@@ -112,7 +112,7 @@ unset($_SESSION['success_message']);
                 </div>
             <?php endif; ?>
             
-            <form action="/Wshooes/auth/signup.php" method="POST">
+            <form action="/Wshooes/pages/signup.php" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -172,7 +172,7 @@ unset($_SESSION['success_message']);
             </form>
             
             <div class="signup-footer">
-                <p>Sudah punya akun? <a href="/Wshooes/auth/login.php">Login sekarang</a></p>
+                <p>Sudah punya akun? <a href="/Wshooes/pages/login.php">Login sekarang</a></p>
             </div>
         </div>
     </div>
