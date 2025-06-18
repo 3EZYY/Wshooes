@@ -45,14 +45,17 @@ class Order {
     public $shipping_postal_code;
     public $notes;
     public $tracking_number;
-    public $shipped_at;
-    public $delivered_at;
+    public $shipped_at;    public $delivered_at;
     public $created_at;
     public $updated_at;
     
+    // Additional properties for customer info
+    public $customer_name;
+    public $customer_email;
+    
     public function __construct() {
-        global $conn;
-        $this->conn = $conn;
+        $database = Database::getInstance();
+        $this->conn = $database->getConnection();
     }
     
     // Generate unique order number
@@ -153,12 +156,10 @@ class Order {
             
             // Calculate total for this item
             $total = $price * $quantity;
-            
-            // Create query
+              // Create query
             $query = "INSERT INTO {$this->items_table} (
-                        order_id, product_id, quantity, price, total, 
-                        product_name, product_image, size, color
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        order_id, product_id, quantity, price
+                    ) VALUES (?, ?, ?, ?)";
             
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -166,18 +167,12 @@ class Order {
             if (!$stmt) {
                 throw new Exception("Database error: " . $this->conn->error);
             }
-            
-            // Bind parameters
-            $stmt->bind_param('iiiddsss', 
+              // Bind parameters
+            $stmt->bind_param('iiid', 
                 $this->id, 
                 $product_id, 
                 $quantity, 
-                $price, 
-                $total, 
-                $product_name, 
-                $product_image, 
-                $size, 
-                $color
+                $price
             );
             
             // Execute query

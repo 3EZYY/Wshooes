@@ -18,8 +18,8 @@ class Cart {
     public $updated_at;
     
     public function __construct() {
-        global $conn;
-        $this->conn = $conn;
+        $database = Database::getInstance();
+        $this->conn = $database->getConnection();
     }
     
     // Add item to cart
@@ -84,7 +84,7 @@ class Cart {
     
     // Get cart items by session or user
     public function getCartItems($session_id, $user_id = null) {
-        $query = "SELECT c.*, p.name as product_name, p.image_url, p.brand 
+        $query = "SELECT c.*, p.name as product_name, p.main_image as image_url, p.price as product_price
                   FROM {$this->table} c 
                   JOIN products p ON c.product_id = p.id 
                   WHERE c.session_id = ?";
@@ -181,24 +181,6 @@ class Cart {
         $row = $result->fetch_assoc();
         
         return $row['count'] ?? 0;
-    }
-        $stmt->bind_param('iiiss', 
-            $this->user_id, 
-            $this->product_id, 
-            $this->quantity, 
-            $this->size, 
-            $this->color
-        );
-        
-        // Execute query
-        if ($stmt->execute()) {
-            $this->id = $this->conn->insert_id;
-            return true;
-        }
-        
-        // Print error if something goes wrong
-        error_log("Error adding item to cart: {$stmt->error}");
-        return false;
     }
     
     // Get cart items for a user

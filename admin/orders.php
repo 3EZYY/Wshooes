@@ -50,6 +50,40 @@ if (isset($_GET['delete'])) {
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $status_filter = isset($_GET['status']) ? $_GET['status'] : '';
 
+$where_conditions = [];
+$params = [];
+$types = '';
+
+if (!empty($search)) {
+    $where_conditions[] = "(o.order_number LIKE ? OR u.full_name LIKE ? OR u.email LIKE ?)";
+    $search_param = "%{$search}%";
+    $params = array_merge($params, [$search_param, $search_param, $search_param]);
+    $types .= 'sss';
+}
+
+if (!empty($status_filter)) {
+    $where_conditions[] = "o.status = ?";
+    $params[] = $status_filter;
+    $types .= 's';
+}
+
+$where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_conditions) : '';
+
+$query = "SELECT o.*, u.full_name, u.email, u.phone_number,
+          (SELECT COUNT(*) FROM order_items WHERE order_id = o.id) as item_count
+          FROM orders o 
+          LEFT JOIN users u ON o.user_id = u.id 
+          {$where_clause}
+          ORDER BY o.created_at DESC";
+
+$stmt = $conn->prepare($query);
+if (!empty($params)) {
+    $stmt->bind_param($types, ...$params);
+}
+$stmt->execute();
+$orders = $stmt->get_result();
+$status_filter = isset($_GET['status']) ? $_GET['status'] : '';
+
 $query = "SELECT o.*, u.username, u.email, u.full_name 
           FROM orders o 
           LEFT JOIN users u ON o.user_id = u.id 

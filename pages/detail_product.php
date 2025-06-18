@@ -287,15 +287,13 @@ $page_title = $product_data['name'] . ' - Wshooes';
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
-                    </div>
-
-                    <!-- Action Buttons -->
+                    </div>                    <!-- Action Buttons -->
                     <div class="space-y-4 pt-6">
-                        <button class="btn-primary w-full py-4 rounded-2xl font-semibold text-white text-lg">
+                        <button onclick="addToCart()" class="btn-primary w-full py-4 rounded-2xl font-semibold text-white text-lg">
                             <i class="fas fa-shopping-bag mr-2"></i>
                             Add to Bag
                         </button>
-                        <button class="btn-secondary w-full py-4 rounded-2xl font-semibold text-white text-lg">
+                        <button onclick="addToWishlist()" class="btn-secondary w-full py-4 rounded-2xl font-semibold text-white text-lg">
                             <i class="far fa-heart mr-2"></i>
                             Add to Favourite
                         </button>
@@ -598,16 +596,88 @@ $page_title = $product_data['name'] . ' - Wshooes';
                 alert('Please select a size');
                 return;
             }
+          // Add to cart function
+        function addToCart() {
+            const selectedSize = document.querySelector('.size-btn.active')?.textContent.trim();
+            const selectedColor = document.querySelector('.color-btn.active')?.dataset.color;
+            const selectedQuantity = parseInt(document.querySelector('.quantity-input').textContent);
             
-            // Simulate cart addition
-            alert(`Added ${selectedQuantity} item(s) to cart!`);
-            
-            // Update cart counter
-            const cartCounter = document.querySelector('.fa-shopping-cart').nextElementSibling;
-            if (cartCounter) {
-                const currentCount = parseInt(cartCounter.textContent) || 0;
-                cartCounter.textContent = currentCount + selectedQuantity;
+            if (!selectedSize) {
+                alert('Please select a size');
+                return;
             }
+            
+            if (!selectedColor) {
+                alert('Please select a color');
+                return;
+            }
+            
+            // Prepare data
+            const formData = new FormData();
+            formData.append('product_id', <?php echo $product_data['id']; ?>);
+            formData.append('quantity', selectedQuantity);
+            formData.append('size', selectedSize);
+            formData.append('color', selectedColor);
+            formData.append('price', <?php echo $product_data['price']; ?>);
+            
+            // Show loading
+            const button = event.target;
+            const originalContent = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Adding...';
+            button.disabled = true;
+            
+            // Send to server
+            fetch('../controllers/add_to_cart.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Product added to cart successfully!');
+                    
+                    // Update cart counter if exists
+                    const cartCounter = document.querySelector('.cart-counter');
+                    if (cartCounter) {
+                        cartCounter.textContent = data.cart_count;
+                    }
+                      // Ask if user wants to continue shopping or go to cart
+                    if (confirm('Product added to cart! Do you want to go to checkout?')) {
+                        window.location.href = 'checkout.php';
+                    }
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding to cart');
+            })
+            .finally(() => {
+                button.innerHTML = originalContent;
+                button.disabled = false;
+            });
+        }
+        
+        function addToWishlist() {
+            // Wishlist functionality
+            const button = event.target;
+            const icon = button.querySelector('i');
+            
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                button.style.background = 'rgba(239, 68, 68, 0.2)';
+                button.style.borderColor = '#ef4444';
+                alert('Added to wishlist!');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                button.style.background = 'rgba(59, 130, 246, 0.1)';
+                button.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                alert('Removed from wishlist!');
+            }
+        }
         }
 
         // Add event listeners
